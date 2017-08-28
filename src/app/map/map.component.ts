@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'map',
@@ -8,6 +8,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 export class MapComponent implements OnInit, OnChanges {
   @Input() bars: any;
   @Input() center: any;
+  @Output() selectedBar: EventEmitter<any> = new EventEmitter();
   ///////////////////
   // Map Settings //
   //////////////////
@@ -18,7 +19,7 @@ export class MapComponent implements OnInit, OnChanges {
   myLat: number = 51.678418;
   myLng: number = 7.809007;
   // default zoom
-  zoom: number = 18;
+  zoom: number = 16;
   // Beer icon
   iconPath: string = '../assets/images/beer-icon-white.png';
   test: string = 'Test';
@@ -62,11 +63,14 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     if(changes.center && changes.center.previousValue !== changes.center.currentValue) {
       this.lng = this.center.lng;
       this.lat = this.center.lat;
     }
 
+  }
+
+  handleMarkerClick(bar) {
+    this.selectedBar.emit(bar);
   }
 }
