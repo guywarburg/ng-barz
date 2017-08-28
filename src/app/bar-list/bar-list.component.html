@@ -1,0 +1,7 @@
+<div class="list-container">
+  <div *ngFor="let bar of bars; let i = index"
+       class="list-item" [class.even]="i % 2 === 0"
+      (click)="setSelectedBar(bar)">
+    <label>{{bar.title}}</label>
+  </div>
+</div>

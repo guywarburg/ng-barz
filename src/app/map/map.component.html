@@ -1,0 +1,12 @@
+<agm-map [latitude]="lat" [longitude]="lng"
+         [styles]="options" [zoom]="zoom" [usePanning]="true"
+         [streetViewControl]="false" [zoomControl]="false">
+  <agm-marker *ngFor="let bar of bars" [latitude]="bar.lat" [longitude]="bar.lng" [iconUrl]="iconPath">
+    <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true" [backgroundColor]="backgroundColor" [border]="border" [fontColor]="fontColor">
+      <ng-template>
+        {{ bar.title }}
+      </ng-template>
+    </agm-snazzy-info-window>
+  </agm-marker>
+  <agm-marker [latitude]="myLat" [longitude]="myLng"></agm-marker>
+</agm-map>

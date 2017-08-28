@@ -1,0 +1,23 @@
+.list-container {
+  height: 100%;
+  width: 100%;
+
+  .list-item {
+    height: 30px;
+    font-family: sans-serif;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    background: #dddd;
+    &:hover {
+      background: #ccc;
+    }
+
+    &.even {
+      background: #fff;
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
+}
