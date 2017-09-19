@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 
 @Component({
   selector: 'map',
@@ -49,7 +50,11 @@ export class MapComponent implements OnInit, OnChanges {
     color: '#eee'
   };
   fontColor: string = '#fff';
+  dbBars: FirebaseListObservable<any[]>;
 
+  constructor(db: AngularFireDatabase) {
+    this.dbBars = db.list('/bars');
+  }
 
   ngOnInit() {
     if (navigator.geolocation) {

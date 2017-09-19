@@ -5,14 +5,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   templateUrl: './bar-list.component.html',
   styleUrls: ['./bar-list.component.scss']
 })
-export class BarListComponent implements OnInit {
+export class BarListComponent {
   @Input() bars: any;
   @Output() selectedBar: EventEmitter<any> = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   setSelectedBar(bar) {
     this.selectedBar.emit(bar);

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-root',
@@ -28,9 +29,14 @@ export class AppComponent{
   },
   ];
   filteredBars: any;
+  dbBars: FirebaseListObservable<any[]>;
+  relative: any;
 
-  constructor() {
-    this.filteredBars = [...this.allBars];
+  constructor(db: AngularFireDatabase) {
+    this.dbBars = db.list('/bars');
+    if(this.dbBars) {
+      this.filteredBars = [...this.allBars];
+    }
   }
   filterBars(value) {
     if(!value) {

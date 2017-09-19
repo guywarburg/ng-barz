@@ -5,7 +5,7 @@
   </div>
   <div class="navigation">
     <search-bar (textChanged)="filterBars($event)"></search-bar>
-    <bar-list [bars]="filteredBars" (selectedBar)="reCenterMap($event)"></bar-list>
+    <bar-list [bars]="dbBars | async" (selectedBar)="reCenterMap($event)"></bar-list>
   </div>
 </div>
 
