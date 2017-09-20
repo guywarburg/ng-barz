@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-rank',
@@ -10,6 +11,7 @@ import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database
 export class RankComponent implements OnInit {
   markVForm: FormGroup;
   ranksObservable: FirebaseListObservable<any[]>;
+  desableMarkButton: boolean = false;
   @Input() barTitle: string;
   @Output() closeModal: EventEmitter<any> = new EventEmitter();
 
@@ -20,6 +22,11 @@ export class RankComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ranksObservable.subscribe(state => {
+      if(!isNullOrUndefined(state)) {
+        this.desableMarkButton = this.canUserVote(state);
+      }
+    })
   }
 
   createForm() {
@@ -37,9 +44,14 @@ export class RankComponent implements OnInit {
       ...this.markVForm.value
     };
     console.log('newRank', newRank);
-    this.ranksObservable.push(newRank);
-    this.closeModal.emit();
-    this.markVForm.reset();
+    try {
+      this.ranksObservable.push(newRank);
+    } catch(error) {
+      console.log('error - cannot rank bar', error);
+    } finally {
+      this.closeModal.emit();
+      this.markVForm.reset();
+    }
   }
 
   getToday() {
@@ -52,5 +64,11 @@ export class RankComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
 
     return [day, month, year].join('/');
+  }
+  canUserVote(ranks) {
+    // get relevant ranks
+    // if user already voted return true
+    // else
+    return false;
   }
 }

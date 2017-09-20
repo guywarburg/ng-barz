@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
-import {isNull, isNullOrUndefined} from "util";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'bar-details',

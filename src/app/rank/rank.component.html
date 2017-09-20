@@ -15,5 +15,5 @@
     <md-slider [thumbLabel]="true" formControlName="atmosphere"></md-slider>
     <i class="fa fa-thumbs-up"></i>
   </div>
-  <button (click)="handleSubmit()" class="mark-v">Mark V</button>
+  <button [disabled]="desableMarkButton" (click)="handleSubmit()" class="mark-v">Mark V</button>
 </form>

@@ -74,7 +74,6 @@ export class AppComponent{
   }
 
   openModal(e) {
-    // console.log('e', e);
     this.openDetailsModal = true;
   }
   openMarkV() {
@@ -82,6 +81,8 @@ export class AppComponent{
     this.openMarkVModal = true;
   }
   closeMarkVModal() {
+    // if user logged in
     this.openMarkVModal = false;
+    // else open login modal
   }
 }
