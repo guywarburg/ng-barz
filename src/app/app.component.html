@@ -1,11 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="main-window">
   <div class="map-container">
-    <map [bars]="filteredBars" [center]="center" (selectedBar)="reCenterMap($event)"></map>
+    <map [bars]="filteredBars" [center]="center" (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></map>
   </div>
   <div class="navigation">
     <search-bar (textChanged)="filterBars($event)"></search-bar>
-    <bar-list [bars]="dbBars | async" (selectedBar)="reCenterMap($event)"></bar-list>
+    <bar-list [bars]="allBars" (selectedBar)="reCenterMap($event)"></bar-list>
   </div>
 </div>
 
+<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
+          [(visible)]="openDetailsModal" [minWidth]="400">
+  <bar-details [bar]="selectedBar"></bar-details>
+  <button class="mark-v" (click)="openMarkV()">Mark V</button>
+</p-dialog>
+<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
+          [(visible)]="openMarkVModal">
+  <app-rank *ngIf="selectedBar" (closeModal)="closeMarkVModal()" [barTitle]="selectedBar.title"></app-rank>
+</p-dialog>

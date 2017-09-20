@@ -4,9 +4,14 @@
   <agm-marker *ngFor="let bar of dbBars | async" [latitude]="bar.lat"
               [longitude]="bar.lng" [iconUrl]="iconPath"
               (markerClick)="handleMarkerClick(bar)">
-    <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true" [backgroundColor]="backgroundColor" [border]="border" [fontColor]="fontColor">
+    <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true"
+                            [backgroundColor]="backgroundColor" [border]="border"
+                            [fontColor]="fontColor" [isOpen]="bar.snazzyStatus || false" [openOnMarkerClick]="false">
       <ng-template>
-        {{ bar.title }}
+        <h3>{{ bar.title }}</h3>
+        <hr>
+        <button (click)="openModal(bar)">open modal</button>
+
       </ng-template>
     </agm-snazzy-info-window>
   </agm-marker>

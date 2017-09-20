@@ -1,0 +1,29 @@
+<div class="main-content" *ngIf="barDetails">
+  <header>
+    <h2>{{barDetails.title}}</h2>
+    <label>Mark v - get a shot!</label>
+  </header>
+  <section class="center-part">
+    <button><i class="fa fa-share-alt"></i></button>
+    <label>57 Marked!</label>
+    <button><i class="fa fa-star"></i></button>
+  </section>
+  <div class="ranking">
+    <div class="rank-container">
+      <i class="fa fa-male"></i>
+      <p-progressBar class="rank-display girls-to-boys" [unit]="''" [value]="relevantRanks.menToWomen"></p-progressBar>
+      <i class="fa fa-female"></i>
+    </div>
+    <div class="rank-container">
+      <i class="fa fa-user"></i>
+      <p-progressBar class="rank-display crowd" [unit]="''" [value]="relevantRanks.crowd"></p-progressBar>
+      <i class="fa fa-users"></i>
+    </div>
+
+    <div class="rank-container">
+      <i class="fa fa-thumbs-down"></i>
+      <p-progressBar class="rank-display atmosphere" [unit]="''" [value]="relevantRanks.atmosphere"></p-progressBar>
+      <i class="fa fa-thumbs-up"></i>
+    </div>
+  </div>
+</div>

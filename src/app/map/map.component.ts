@@ -10,6 +10,7 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() bars: any;
   @Input() center: any;
   @Output() selectedBar: EventEmitter<any> = new EventEmitter();
+  @Output() openDialog: EventEmitter<any> = new EventEmitter();
   ///////////////////
   // Map Settings //
   //////////////////
@@ -23,7 +24,6 @@ export class MapComponent implements OnInit, OnChanges {
   zoom: number = 16;
   // Beer icon
   iconPath: string = '../assets/images/beer-icon-white.png';
-  test: string = 'Test';
   // map color settings
   options: any = [
     {
@@ -76,6 +76,13 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   handleMarkerClick(bar) {
+    bar.snazzyStatus = true;
     this.selectedBar.emit(bar);
+  }
+
+  openModal(bar) {
+    console.log('click');
+    bar.snazzyStatus = false;
+    this.openDialog.emit(bar);
   }
 }

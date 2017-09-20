@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
+  openDetailsModal: boolean = false;
+  selectedBar: any;
+  openMarkVModal: boolean = false;
+  val: number;
   center: any = {
     lng: '',
     lat: ''
@@ -29,15 +34,21 @@ export class AppComponent{
   },
   ];
   filteredBars: any;
-  dbBars: FirebaseListObservable<any[]>;
-  relative: any;
+  barsObservable: FirebaseListObservable<any[]>;
 
   constructor(db: AngularFireDatabase) {
-    this.dbBars = db.list('/bars');
-    if(this.dbBars) {
-      this.filteredBars = [...this.allBars];
-    }
+    this.barsObservable = db.list('/bars');
+    // if(this.barsObservable) {
+    //   this.filteredBars = [...this.allBars];
+    // }
+    this.barsObservable.subscribe(state => {
+      if(!isNullOrUndefined(state)) {
+        this.allBars = [...state];
+        this.filteredBars = [...this.allBars];
+      }
+    });
   }
+
   filterBars(value) {
     if(!value) {
       this.filteredBars = [...this.allBars];
@@ -50,10 +61,27 @@ export class AppComponent{
 
   reCenterMap(bar) {
     console.log('bar', bar);
+    this.assignSelectedBar(bar);
     let newCenter: any = {
       lng: bar.lng,
       lat: bar.lat
     };
     this.center = Object.assign({}, newCenter);
+  }
+
+  assignSelectedBar(bar) {
+    this.selectedBar = bar;
+  }
+
+  openModal(e) {
+    // console.log('e', e);
+    this.openDetailsModal = true;
+  }
+  openMarkV() {
+    this.openDetailsModal = false;
+    this.openMarkVModal = true;
+  }
+  closeMarkVModal() {
+    this.openMarkVModal = false;
   }
 }

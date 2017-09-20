@@ -1,0 +1,19 @@
+<form [formGroup]="markVForm" class="ranker">
+  <div class="rank-container">
+    <i class="fa fa-male"></i>
+    <md-slider [thumbLabel]="true" formControlName="menToWomen"></md-slider>
+    <i class="fa fa-female"></i>
+  </div>
+  <div class="rank-container">
+    <i class="fa fa-user"></i>
+    <md-slider [thumbLabel]="true" formControlName="crowd"></md-slider>
+    <i class="fa fa-users"></i>
+  </div>
+
+  <div class="rank-container">
+    <i class="fa fa-thumbs-down"></i>
+    <md-slider [thumbLabel]="true" formControlName="atmosphere"></md-slider>
+    <i class="fa fa-thumbs-up"></i>
+  </div>
+  <button (click)="handleSubmit()" class="mark-v">Mark V</button>
+</form>

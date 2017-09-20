@@ -11,9 +11,13 @@ import { MapComponent } from './map/map.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BarListComponent } from './bar-list/bar-list.component';
 import {AngularFireDatabaseModule} from "angularfire2/database";
-import { LoginComponent } from './login/login.component';
 import {AngularFireAuthModule} from "angularfire2/auth";
-import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
+import {DialogModule, ProgressBarModule } from "primeng/primeng";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BarDetailsComponent} from "./bar-details/bar-details.component";
+import {MdSliderModule} from "@angular/material";
+import { RankComponent } from './rank/rank.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import {FormsModule} from "@angular/forms";
     MapComponent,
     SearchBarComponent,
     BarListComponent,
-    LoginComponent
+    BarDetailsComponent,
+    RankComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,11 @@ import {FormsModule} from "@angular/forms";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FormsModule // TODO - remove
+    ReactiveFormsModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    ProgressBarModule,
+    MdSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
