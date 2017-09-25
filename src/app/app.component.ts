@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import {isNullOrUndefined} from "util";
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +14,7 @@ export class AppComponent{
   openDetailsModal: boolean = false;
   selectedBar: any;
   openMarkVModal: boolean = false;
+  openLoginModal: boolean = false;
   val: number;
   center: any = {
     lng: '',
@@ -35,18 +39,26 @@ export class AppComponent{
   ];
   filteredBars: any;
   barsObservable: FirebaseListObservable<any[]>;
+  userLoggedIn: boolean = false;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(db: AngularFireDatabase,
+              public afAuth: AngularFireAuth) {
     this.barsObservable = db.list('/bars');
-    // if(this.barsObservable) {
-    //   this.filteredBars = [...this.allBars];
-    // }
     this.barsObservable.subscribe(state => {
       if(!isNullOrUndefined(state)) {
         this.allBars = [...state];
         this.filteredBars = [...this.allBars];
       }
     });
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if(user) {
+        console.log('user', user);
+        this.userLoggedIn = true;
+      } else {
+        console.log('user', user);
+        this.userLoggedIn = false;
+      }
+     });
   }
 
   filterBars(value) {
@@ -78,7 +90,12 @@ export class AppComponent{
   }
   openMarkV() {
     this.openDetailsModal = false;
-    this.openMarkVModal = true;
+    if(this.userLoggedIn) {
+      this.openMarkVModal = true;  
+    } else {
+      this.openLoginModal = true;
+    }
+    
   }
   closeMarkVModal() {
     // if user logged in

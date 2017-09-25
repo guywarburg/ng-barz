@@ -18,3 +18,7 @@
           [(visible)]="openMarkVModal">
   <app-rank *ngIf="selectedBar" (closeModal)="closeMarkVModal()" [barTitle]="selectedBar.title"></app-rank>
 </p-dialog>
+<p-dialog [header]="'Login'" [modal]="true" [dismissableMask]="true"
+          [(visible)]="openLoginModal">
+  <app-login></app-login>
+</p-dialog>

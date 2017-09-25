@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BarDetailsComponent} from "./bar-details/bar-details.component";
 import {MdSliderModule} from "@angular/material";
 import { RankComponent } from './rank/rank.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RankComponent } from './rank/rank.component';
     SearchBarComponent,
     BarListComponent,
     BarDetailsComponent,
-    RankComponent
+    RankComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

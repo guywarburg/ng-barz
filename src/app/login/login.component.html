@@ -1,0 +1,22 @@
+<div class="login-container">
+    <form *ngIf="login" [formGroup]="loginForm" class="login">
+        <div>
+          <label for="email">Email</label>
+          <input type="text" id="email" formControlName="email">
+          <small *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.touched" class="alert alert-danger">
+              Email is required
+          </small>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="text" id="password" formControlName="password">
+            <!-- <small [hidden]="loginForm.password.valid">
+                Password is required
+            </small> -->
+          </div>
+    </form>
+    <!-- <form *ngIf="!login" [formGroup]="loginForm" class="login">
+        
+    </form> -->
+    <button>{{login ? 'Login' : 'Sign Up'}}</button>
+</div>
