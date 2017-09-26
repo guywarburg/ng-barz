@@ -1,0 +1,17 @@
+.login-container {
+    min-width: 250px;
+    .form-control {
+        display: flex;
+        flex-direction: column;
+        + .form-control {
+            margin-top: 10px;
+        }
+        input {
+            margin-top: 5px;
+        }
+        .error {
+            margin-top: 3px;
+            color: red;
+        }
+    }
+}
