@@ -6,6 +6,7 @@
   <div class="navigation">
     <search-bar (textChanged)="filterBars($event)"></search-bar>
     <bar-list [bars]="allBars" (selectedBar)="reCenterMap($event)"></bar-list>
+    <button (click)="logout()">Log Out</button>
   </div>
 </div>
 
@@ -20,5 +21,6 @@
 </p-dialog>
 <p-dialog [header]="'Login'" [modal]="true" [dismissableMask]="true"
           [(visible)]="openLoginModal">
-  <app-login></app-login>
+  <app-login (close)="openLoginModal = false"
+             (loginSuccess)="handleLoginSucess()"></app-login>
 </p-dialog>

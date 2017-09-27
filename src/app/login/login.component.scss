@@ -14,4 +14,27 @@
             color: red;
         }
     }
+    .submit {
+        display: flex;
+        flex-direction: column;
+        button {
+            width: 100%;
+            margin-top: 10px;
+            &.primary {
+                background: #6CB2DF;
+            }
+        }
+    }
+    hr {
+        margin: 10px 0;
+    }
+    .toggle-view {
+        text-align: center;
+        a {
+            color: #eee;
+            margin-left: 5px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
 }

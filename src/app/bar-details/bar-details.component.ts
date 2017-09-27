@@ -13,6 +13,7 @@ export class BarDetailsComponent implements OnChanges {
   ranksObservable: FirebaseListObservable<any[]>;
   todayRanks: any[];
   relevantRanks: any;
+  relevantNumberOfRanks: number;
 
   constructor(db: AngularFireDatabase) {
     let today = this.getToday();
@@ -35,21 +36,27 @@ export class BarDetailsComponent implements OnChanges {
     this.barDetails = this.bar;
     if(!isNullOrUndefined(this.todayRanks)){
       this.relevantRanks = this.getRanksPerBar(this.barDetails.title, this.todayRanks);
+      this.relevantNumberOfRanks = this.getNumberOfRanks(this.barDetails.title, this.todayRanks);
     }
     console.log('this.relevantRanks', this.relevantRanks);
   }
 
   getToday() {
     let d = new Date(),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    hour = d.getHours();
 
+  // if the time is before 6am fix date to yesterday
+  if(hour < 6) d.setDate(d.getDate() - 1);
+
+  let month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+    
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
 
-    return [day, month, year].join('/');
-  }
+  return [day, month, year].join('/');
+}
 
   getRanksPerBar(barName: string, ranks: any[]): any {
     let filteredRanks = ranks.filter(item => {
@@ -79,5 +86,11 @@ export class BarDetailsComponent implements OnChanges {
       crowd: Math.floor(crowd / data.length),
       menToWomen: Math.floor(menToWomen / data.length)
     }
+  }
+
+  getNumberOfRanks(barName: string, ranks: any[]): number {
+    return ranks.filter(item => {
+      return item.barName === barName;
+    }).length;
   }
 }

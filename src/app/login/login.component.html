@@ -3,28 +3,49 @@
         <div class="form-control">
           <label for="email">Email</label>
           <input type="text" id="email" formControlName="email">
-          <small class="error" 
-          *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.touched">
-              Email is required
-          </small>
         </div>
         <div class="form-control">
           <label for="password">Password</label>
           <input type="password" id="password" formControlName="password">
-          <small class="error" 
-          *ngIf="loginForm.controls.password.hasError('required')">
-              Password is required
-          </small>
-          <small class="error"
-          *ngIf="loginForm.controls.password.hasError('minlength')">
-              Password must be at least 6 characters
-          </small>
         </div>
     </form>
-    <!-- <form *ngIf="!login" [formGroup]="loginForm" class="login">
-        
-    </form> -->
-    <button>{{login ? 'Login' : 'Sign Up'}}</button>
-    <button (click)="login = !login">{{login ? 'Sign Up' : 'Login'}}</button>
-    <button>cancel</button>
+    <form *ngIf="!login" [formGroup]="registerForm" class="login">
+      <div class="form-control">
+        <label for="email">Name</label>
+        <input type="text" id="email" formControlName="name">
+        <small class="error" 
+        *ngIf="registerForm.controls.name.hasError('required') && registerForm.controls.name.touched">
+            Name is required
+        </small>
+      </div>  
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email">
+        <small class="error" 
+        *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched">
+            Email is required
+        </small>
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+        <small class="error" 
+        *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched">
+            Password is required
+        </small>
+        <small class="error"
+        *ngIf="registerForm.controls.password.hasError('minlength') && registerForm.controls.password.touched">
+            Password must be at least 6 characters
+        </small>
+      </div>
+    </form>
+    <div class="submit">
+        <button class="primary" (click)="handleRegistration()">{{login ? 'Log In' : 'Register'}}</button>
+        <button (click)="handleClose()">Cancel</button>
+    </div>
+    <hr>
+    <div class="toggle-view">
+        <label>{{login ? 'Not a member?' : 'Already a member?'}}</label>
+        <a (click)="login = !login">{{login ? 'Sign Up' : 'Login'}}</a>
+    </div>
 </div>

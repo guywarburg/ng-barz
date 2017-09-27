@@ -98,8 +98,14 @@ export class AppComponent{
     
   }
   closeMarkVModal() {
-    // if user logged in
     this.openMarkVModal = false;
-    // else open login modal
+  }
+  handleLoginSucess() {
+    this.openLoginModal = false;
+    this.openMarkVModal = true;
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 }

@@ -40,6 +40,7 @@ export class RankComponent implements OnInit {
   handleSubmit(){
     let newRank = {
       barName: this.barTitle, // TODO - pass barName
+      timestamp: new Date(),
       date: this.getToday(),
       ...this.markVForm.value
     };
@@ -56,12 +57,17 @@ export class RankComponent implements OnInit {
 
   getToday() {
     let d = new Date(),
-      month = '' + (d.getMonth() + 1),
+      hour = d.getHours();
+
+    // if the time is before 6am fix date to yesterday
+    if(hour < 6) d.setDate(d.getDate() - 1);
+
+    let month = '' + (d.getMonth() + 1),
       day = '' + d.getDate(),
       year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+      
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
 
     return [day, month, year].join('/');
   }
