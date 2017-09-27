@@ -39,8 +39,9 @@ export class RankComponent implements OnInit {
 
   handleSubmit(){
     let newRank = {
-      barName: this.barTitle, // TODO - pass barName
-      timestamp: new Date(),
+      // TODO - add UID
+      barName: this.barTitle,
+      timestamp: new Date().getTime(),
       date: this.getToday(),
       ...this.markVForm.value
     };
