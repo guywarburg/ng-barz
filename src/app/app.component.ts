@@ -102,11 +102,9 @@ export class AppComponent{
   }
   handleLoginSucess() {
     this.openLoginModal = false;
-    this.openMarkVModal = true;
-  }
-
-  logout() {
-    this.afAuth.auth.signOut();
+    if(!isNullOrUndefined(this.selectedBar)){
+      this.openMarkVModal = true;
+    }
   }
 
   toggleSearch() {

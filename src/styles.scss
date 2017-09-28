@@ -2,6 +2,7 @@
 html, body {
   margin: 0;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 //PrimeNG overrides
@@ -63,4 +64,8 @@ button {
   border: none;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }

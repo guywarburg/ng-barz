@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -8,6 +8,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @Input() userLoggedIn: boolean;
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Output() loginSuccess: EventEmitter<any> = new EventEmitter();
   login: boolean = true;
@@ -66,6 +67,10 @@ export class LoginComponent implements OnInit {
         console.log('error', error);
       });
     }
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 }
 

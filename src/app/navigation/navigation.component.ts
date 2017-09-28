@@ -15,4 +15,7 @@ export class NavigationComponent {
   toggleSearch() {
     this.openSearch.emit();
   }
+  handleLoginClick() {
+    this.openLogin.emit();
+  }
 }

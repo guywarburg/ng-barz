@@ -1,3 +1,5 @@
+$side-width: 300px;
+
 .page-wrapper {
   display: flex;
   flex-direction: column;
@@ -10,23 +12,31 @@
 
 .map-container {
   flex: 1;
+  margin-right: $side-width;
+  height: 100vh;
 }
 
 .search-area {
   background: #505050;
-  width: 300px;
+  position: fixed;
+  right: 0;
+  width: $side-width;
   height: 100vh;
-  transition: 0.3s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 @media only screen and (max-width: 500px) {
   .search-area {
     transform: translateX(540px);
-    width: 0;
+    //position: absolute;
     &.isVisible {
       transform: translateX(0);
-      width: 300px;
+      background: rgba(80, 80, 80, 0.8);
+      //position: fixed;
     }
+  }
+  .map-container{
+    margin-right: 0;
   }
   .main-window {
     width: 100%;

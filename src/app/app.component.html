@@ -1,14 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="page-wrapper">
-  <navigation (openSearch)="toggleSearch()"></navigation>
+  <navigation (openSearch)="toggleSearch()" (openLogin)="openLoginModal = true"></navigation>
   <div class="main-window">
     <div class="map-container">
-      <map [bars]="filteredBars" [center]="center" (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></map>
+      <map [bars]="filteredBars" [center]="center" [class.isVisible]="searchVisible"
+           (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></map>
     </div>
     <div class="search-area" [class.isVisible]="searchVisible">
       <search-bar (textChanged)="filterBars($event)"></search-bar>
       <bar-list [bars]="allBars" (selectedBar)="reCenterMap($event)"></bar-list>
-      <button (click)="logout()">Log Out</button>
     </div>
   </div>
 </div>
@@ -24,6 +24,6 @@
 </p-dialog>
 <p-dialog [header]="'Login'" [modal]="true" [dismissableMask]="true"
           [(visible)]="openLoginModal">
-  <app-login (close)="openLoginModal = false"
+  <app-login (close)="openLoginModal = false" [userLoggedIn]="userLoggedIn"
              (loginSuccess)="handleLoginSucess()"></app-login>
 </p-dialog>
