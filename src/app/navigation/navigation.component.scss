@@ -1,0 +1,26 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  background: #202020;
+  color: #fff;
+  height: 50px;
+  border-bottom: 2px solid #4a8fbc;
+  font-size: 20px;
+}
+
+.login {
+  cursor: pointer;
+}
+
+.search {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+  .search {
+    display: inline-block;
+  }
+}

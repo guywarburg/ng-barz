@@ -7,15 +7,16 @@
     font-size: 1.2em;
     cursor: pointer;
     padding: 5px;
-    background: #dddd;
+    color: #fff;
+    background: #202020;
     &:hover {
-      background: #ccc;
+      background: #000;
     }
 
     &.even {
-      background: #fff;
+      background: #505050;
       &:hover {
-        background: #ccc;
+        background: #000;
       }
     }
   }

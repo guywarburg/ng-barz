@@ -15,7 +15,7 @@ export class AppComponent{
   selectedBar: any;
   openMarkVModal: boolean = false;
   openLoginModal: boolean = false;
-  val: number;
+  searchVisible: boolean = false;
   center: any = {
     lng: '',
     lat: ''
@@ -91,11 +91,11 @@ export class AppComponent{
   openMarkV() {
     this.openDetailsModal = false;
     if(this.userLoggedIn) {
-      this.openMarkVModal = true;  
+      this.openMarkVModal = true;
     } else {
       this.openLoginModal = true;
     }
-    
+
   }
   closeMarkVModal() {
     this.openMarkVModal = false;
@@ -107,5 +107,9 @@ export class AppComponent{
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  toggleSearch() {
+    this.searchVisible = !this.searchVisible;
   }
 }

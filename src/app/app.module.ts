@@ -19,6 +19,7 @@ import {BarDetailsComponent} from "./bar-details/bar-details.component";
 import {MdSliderModule} from "@angular/material";
 import { RankComponent } from './rank/rank.component';
 import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginComponent } from './login/login.component';
     BarListComponent,
     BarDetailsComponent,
     RankComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
