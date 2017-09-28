@@ -1,6 +1,6 @@
 <div class="login-container">
   <div *ngIf="userLoggedIn">
-    <h4>Welcome!</h4>
+    <h4>Welcome {{userName}}!</h4>
     <button class="primary" (click)="logout()">Log out</button>
   </div>
   <div *ngIf="!userLoggedIn">

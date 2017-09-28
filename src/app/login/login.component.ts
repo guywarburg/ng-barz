@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input, OnChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -7,20 +7,24 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnChanges {
   @Input() userLoggedIn: boolean;
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Output() loginSuccess: EventEmitter<any> = new EventEmitter();
   login: boolean = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
+  userName: string;
 
   constructor(private fb: FormBuilder,
           public afAuth: AngularFireAuth) {
     this.createForm();
    }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if(this.afAuth.auth.currentUser !== null) {
+      this.userName = this.afAuth.auth.currentUser.displayName;
+    }
   }
 
   createForm() {
@@ -60,13 +64,26 @@ export class LoginComponent implements OnInit {
         // handle success
         console.log('success', res);
         this.loginSuccess.emit();
-        // close modal, open markv modal
+        this.addUserName();
       }
       ).catch((error) => {
         // Handle Errors here.
         console.log('error', error);
       });
     }
+  }
+
+  addUserName() {
+    let user = this.afAuth.auth.currentUser,
+      userName:string = this.registerForm.controls.name.value.toString();
+
+    user.updateProfile({displayName: userName, photoURL: ''}).then((res) => {
+      // Update successful.
+      console.log('username updated', res);
+    }).catch((error) => {
+      // An error happened.
+      console.log('error', error);
+    });
   }
 
   logout() {
