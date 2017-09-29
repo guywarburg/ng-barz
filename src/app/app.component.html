@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="page-wrapper">
-  <navigation (openSearch)="toggleSearch()" (openLogin)="openLoginModal = true"></navigation>
+  <navigation (openSearch)="toggleSearch()" (click)="openDialog()" (openLogin)="openLoginModal = true"></navigation>
   <div class="main-window">
     <div class="map-container">
       <map [bars]="filteredBars" [center]="center" [class.isVisible]="searchVisible"

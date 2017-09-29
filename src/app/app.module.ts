@@ -16,7 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {DialogModule, ProgressBarModule } from "primeng/primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BarDetailsComponent} from "./bar-details/bar-details.component";
-import {MdSliderModule} from "@angular/material";
+import {MdSliderModule, MdDialogModule} from "@angular/material";
 import { RankComponent } from './rank/rank.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -45,9 +45,11 @@ import { NavigationComponent } from './navigation/navigation.component';
     DialogModule,
     BrowserAnimationsModule,
     ProgressBarModule,
-    MdSliderModule
+    MdSliderModule,
+    MdDialogModule
   ],
   providers: [],
+  entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

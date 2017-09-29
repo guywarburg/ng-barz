@@ -4,6 +4,8 @@ import {isNullOrUndefined} from "util";
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import {MdDialog} from '@angular/material';
+import {LoginComponent} from './login/login.component'
 
 import {tempDb} from '../temp';
 
@@ -46,7 +48,8 @@ export class AppComponent{
   userLoggedIn: boolean = false;
 
   constructor(db: AngularFireDatabase,
-              public afAuth: AngularFireAuth) {
+              public afAuth: AngularFireAuth,
+              public dialog: MdDialog) {
     this.barsObservable = db.list('/bars');
     this.barsObservable.subscribe(state => {
       if(!isNullOrUndefined(state)) {
@@ -125,5 +128,8 @@ export class AppComponent{
     return relevantRanks.filter(item => {
       return item.uid === uid;
     }).length > 0;
+  }
+  openDialog() {
+    // this.dialog.open(LoginComponent);
   }
 }
