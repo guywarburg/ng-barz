@@ -45,7 +45,6 @@ export class RankComponent implements OnInit {
       date: this.getToday(),
       ...this.markVForm.value
     };
-    console.log('newRank', newRank);
     try {
       this.ranksObservable.push(newRank);
     } catch(error) {

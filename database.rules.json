@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth != null",
+    "ranks": {
+      ".indexOn": [
+        "date",
+        "barName"
+      ]
+    }
+  }
+}

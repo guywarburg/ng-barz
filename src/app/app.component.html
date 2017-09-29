@@ -8,13 +8,13 @@
     </div>
     <div class="search-area" [class.isVisible]="searchVisible">
       <search-bar (textChanged)="filterBars($event)"></search-bar>
-      <bar-list [bars]="allBars" (selectedBar)="reCenterMap($event)"></bar-list>
+      <bar-list [bars]="filteredBars" (selectedBar)="reCenterMap($event)"></bar-list>
     </div>
   </div>
 </div>
 
 <p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
-          [(visible)]="openDetailsModal" [minWidth]="400">
+          [(visible)]="openDetailsModal" [minWidth]="300">
   <bar-details [bar]="selectedBar"></bar-details>
   <button class="mark-v" (click)="openMarkV()">Mark V</button>
 </p-dialog>

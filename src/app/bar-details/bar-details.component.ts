@@ -38,7 +38,6 @@ export class BarDetailsComponent implements OnChanges {
       this.relevantRanks = this.getRanksPerBar(this.barDetails.title, this.todayRanks);
       this.relevantNumberOfRanks = this.getNumberOfRanks(this.barDetails.title, this.todayRanks);
     }
-    console.log('this.relevantRanks', this.relevantRanks);
   }
 
   getToday() {

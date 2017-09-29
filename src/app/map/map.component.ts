@@ -15,11 +15,11 @@ export class MapComponent implements OnInit, OnChanges {
   // Map Settings //
   //////////////////
   // default center
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 32.0767365;
+  lng: number = 34.7800686;
   // My Location
-  myLat: number = 51.678418;
-  myLng: number = 7.809007;
+  myLat: number = 32.0767365;
+  myLng: number = 34.7800686;
   // default zoom
   zoom: number = 16;
   // Beer icon
@@ -50,10 +50,8 @@ export class MapComponent implements OnInit, OnChanges {
     color: '#eee'
   };
   fontColor: string = '#fff';
-  dbBars: FirebaseListObservable<any[]>;
 
-  constructor(db: AngularFireDatabase) {
-    this.dbBars = db.list('/bars');
+  constructor() {
   }
 
   ngOnInit() {
@@ -69,10 +67,9 @@ export class MapComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.center && changes.center.previousValue !== changes.center.currentValue) {
-      this.lng = this.center.lng;
-      this.lat = this.center.lat;
+      this.lng = this.center.lng ? this.center.lng: this.lng;
+      this.lat = this.center.lat ? this.center.lat : this.lat;
     }
-
   }
 
   handleMarkerClick(bar) {
@@ -81,7 +78,6 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   openModal(bar) {
-    console.log('click');
     bar.snazzyStatus = false;
     this.openDialog.emit(bar);
   }

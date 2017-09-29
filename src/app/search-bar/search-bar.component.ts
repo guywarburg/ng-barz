@@ -10,7 +10,6 @@ export class SearchBarComponent {
   filterText: string = '';
 
   handleTextChange(e) {
-    console.log('e', e);
     this.filterText = e.target.value;
     this.textChanged.emit(this.filterText);
   }

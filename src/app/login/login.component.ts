@@ -47,10 +47,8 @@ export class LoginComponent implements OnChanges {
     if(this.login) {
       const email = this.loginForm.controls.email.value;
       const pass = this.loginForm.controls.password.value;
-      console.log(`logging in as ${email} with ${pass}`);
       this.afAuth.auth.signInWithEmailAndPassword(email, pass).then((res) => {
       // handle success
-      console.log('success', res);
       this.loginSuccess.emit();
       // close modal, open markv modal
       }).catch((error) => {
@@ -62,7 +60,6 @@ export class LoginComponent implements OnChanges {
       const pass = this.registerForm.controls.password.value;
       this.afAuth.auth.createUserWithEmailAndPassword(email, pass).then((res) => {
         // handle success
-        console.log('success', res);
         this.loginSuccess.emit();
         this.addUserName();
       }
@@ -79,7 +76,6 @@ export class LoginComponent implements OnChanges {
 
     user.updateProfile({displayName: userName, photoURL: ''}).then((res) => {
       // Update successful.
-      console.log('username updated', res);
     }).catch((error) => {
       // An error happened.
       console.log('error', error);

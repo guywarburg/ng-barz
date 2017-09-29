@@ -5,12 +5,15 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+import {tempDb} from '../temp';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
+  temp: any;
   openDetailsModal: boolean = false;
   selectedBar: any;
   openMarkVModal: boolean = false;
@@ -52,10 +55,8 @@ export class AppComponent{
     });
     this.afAuth.auth.onAuthStateChanged(user => {
       if(user) {
-        console.log('user', user);
         this.userLoggedIn = true;
       } else {
-        console.log('user', user);
         this.userLoggedIn = false;
       }
      });
@@ -66,13 +67,17 @@ export class AppComponent{
       this.filteredBars = [...this.allBars];
     } else {
       this.filteredBars = this.allBars.filter(bar => {
-        return bar.title.toLowerCase().indexOf(value.toLowerCase()) > -1;
+        if(typeof bar.title === 'string') {
+          return bar.title.toLowerCase().indexOf(value.toLowerCase()) > -1;
+        } else {
+          return true;
+        }
+        
       })
     }
   }
 
   reCenterMap(bar) {
-    console.log('bar', bar);
     this.assignSelectedBar(bar);
     let newCenter: any = {
       lng: bar.lng,
