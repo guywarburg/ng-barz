@@ -32,6 +32,7 @@ $side-width: 300px;
     &.isVisible {
       transform: translateX(0);
       background: rgba(80, 80, 80, 0.8);
+      width: 100%;
       //position: fixed;
     }
   }
