@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, EventEmitter} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {isNullOrUndefined} from "util";
 
@@ -9,6 +9,7 @@ import {isNullOrUndefined} from "util";
 })
 export class BarDetailsComponent implements OnChanges {
   @Input() bar: any;
+  @Output() openMarkV: EventEmitter<any> = new EventEmitter();
   barDetails: any;
   ranksObservable: FirebaseListObservable<any[]>;
   todayRanks: any[];
@@ -91,5 +92,17 @@ export class BarDetailsComponent implements OnChanges {
     return ranks.filter(item => {
       return item.barName === barName;
     }).length;
+  }
+
+  getAllRelevantRanks(barName: string, ranks: any[]): any[] {
+    return ranks.filter(item => {
+      return item.barName === barName;
+    });
+  }
+
+  handleOpenMarkV() {
+    this.openMarkV.emit(
+      this.getAllRelevantRanks(this.barDetails.title, this.todayRanks)
+    );
   }
 }

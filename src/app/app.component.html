@@ -15,8 +15,7 @@
 
 <p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
           [(visible)]="openDetailsModal" [minWidth]="300">
-  <bar-details [bar]="selectedBar"></bar-details>
-  <button class="mark-v" (click)="openMarkV()">Mark V</button>
+  <bar-details [bar]="selectedBar" (openMarkV)="openMarkV($event)"></bar-details>
 </p-dialog>
 <p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
           [(visible)]="openMarkVModal">
@@ -26,4 +25,10 @@
           [(visible)]="openLoginModal">
   <app-login (close)="openLoginModal = false" [userLoggedIn]="userLoggedIn"
              (loginSuccess)="handleLoginSucess()"></app-login>
+</p-dialog>
+<p-dialog [header]="'Error'" [modal]="true" [dismissableMask]="true"
+[(visible)]="openUserAlreadyMakredModal">
+  <div>Sorry, but you already marked this bar today</div>
+  <br>
+  <div style="text-align: right">סליחה, אבל כבר סימנת כאן היום</div>
 </p-dialog>

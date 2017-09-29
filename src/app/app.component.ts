@@ -19,6 +19,7 @@ export class AppComponent{
   openMarkVModal: boolean = false;
   openLoginModal: boolean = false;
   searchVisible: boolean = false;
+  openUserAlreadyMakredModal: boolean = false;
   center: any = {
     lng: '',
     lat: ''
@@ -93,10 +94,15 @@ export class AppComponent{
   openModal(e) {
     this.openDetailsModal = true;
   }
-  openMarkV() {
+  openMarkV(e) {
     this.openDetailsModal = false;
+    console.log('e', e);
     if(this.userLoggedIn) {
-      this.openMarkVModal = true;
+      if(this.userAlreadyMarked(this.afAuth.auth.currentUser.uid, e)) {
+        this.openUserAlreadyMakredModal = true;
+      } else {
+        this.openMarkVModal = true; 
+      }
     } else {
       this.openLoginModal = true;
     }
@@ -114,5 +120,10 @@ export class AppComponent{
 
   toggleSearch() {
     this.searchVisible = !this.searchVisible;
+  }
+  userAlreadyMarked(uid: string, relevantRanks: any[]): boolean {
+    return relevantRanks.filter(item => {
+      return item.uid === uid;
+    }).length > 0;
   }
 }

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
+import { AngularFireAuth } from 'angularfire2/auth';
 import {isNullOrUndefined} from "util";
 
 @Component({
@@ -16,7 +17,8 @@ export class RankComponent implements OnInit {
   @Output() closeModal: EventEmitter<any> = new EventEmitter();
 
   constructor(private fb: FormBuilder,
-              db: AngularFireDatabase) {
+              db: AngularFireDatabase,
+              public afAuth: AngularFireAuth) {
     this.createForm();
     this.ranksObservable = db.list('/ranks');
   }
@@ -39,7 +41,7 @@ export class RankComponent implements OnInit {
 
   handleSubmit(){
     let newRank = {
-      // TODO - add UID
+      uid: this.afAuth.auth.currentUser.uid,
       barName: this.barTitle,
       timestamp: new Date().getTime(),
       date: this.getToday(),
