@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 
 @Component({
   selector: 'map',
@@ -43,13 +42,6 @@ export class MapComponent implements OnInit, OnChanges {
       }]
     }
   ];
-  // info window settings
-  backgroundColor: string = '#000';
-  border: any = {
-    width: '1px',
-    color: '#eee'
-  };
-  fontColor: string = '#fff';
 
   constructor() {
   }
@@ -73,12 +65,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   handleMarkerClick(bar) {
-    bar.snazzyStatus = true;
     this.selectedBar.emit(bar);
-  }
-
-  openModal(bar) {
-    bar.snazzyStatus = false;
     this.openDialog.emit(bar);
   }
 }
