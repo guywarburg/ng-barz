@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
+import {mapColors} from "../../shared/config";
 
 @Component({
   selector: 'map',
@@ -11,58 +11,28 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() center: any;
   @Output() selectedBar: EventEmitter<any> = new EventEmitter();
   @Output() openDialog: EventEmitter<any> = new EventEmitter();
-  ///////////////////
-  // Map Settings //
-  //////////////////
-  // default center
-  lat: number = 32.0767365;
-  lng: number = 34.7800686;
-  // My Location
-  myLat: number = 32.0767365;
-  myLng: number = 34.7800686;
-  // default zoom
-  zoom: number = 16;
-  // Beer icon
-  iconPath: string = '../assets/images/beer-icon-white.png';
-  // map color settings
-  options: any = [
-    {
-      stylers: [
-        { "invert_lightness": "true" }, {"visibility": "simplified"}]
-    },
-    {
-      featureType: "poi",
-      stylers: [{
-        "visibility": "off"
-      }]
-    },
-    {
-      featureType: "transit",
-      stylers: [{
-        "visibility": "off"
-      }]
-    }
-  ];
-  // info window settings
-  backgroundColor: string = '#000';
-  border: any = {
-    width: '1px',
-    color: '#eee'
-  };
-  fontColor: string = '#fff';
+
+  public lat: number;
+  public lng: number;
+
+  public myLat: number;
+  public myLng: number;
+
+  public zoom: number;
+
+  public iconPath: string;
+
+  public mapOptions: any[];
 
   constructor() {
+    this.setDefaultValues();
+    this.iconPath = '../assets/images/beer-icon-white.png';
+    this.mapOptions = mapColors;
   }
 
   ngOnInit() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lng = position.coords.longitude;
-        this.lat = position.coords.latitude;
-        this.myLng = position.coords.longitude;
-        this.myLat = position.coords.latitude;
-      });
-    }
+    this.setMyLocation();
+    this.centerMapToLocation();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -72,13 +42,27 @@ export class MapComponent implements OnInit, OnChanges {
     }
   }
 
-  handleMarkerClick(bar) {
-    bar.snazzyStatus = true;
-    this.selectedBar.emit(bar);
+  setDefaultValues() {
+    this.myLat = 32.0767365;
+    this.myLng = 34.7800686;
+    this.zoom = 16;
   }
 
-  openModal(bar) {
-    bar.snazzyStatus = false;
+  setMyLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.myLng = position.coords.longitude;
+        this.myLat = position.coords.latitude;
+      });
+    }
+  }
+
+  centerMapToLocation() {
+    this.lat = this.myLat;
+    this.lng = this.myLng;
+  }
+  handleMarkerClick(bar) {
+    this.selectedBar.emit(bar);
     this.openDialog.emit(bar);
   }
 }

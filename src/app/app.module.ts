@@ -6,7 +6,6 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
-import {AgmSnazzyInfoWindowModule} from "@agm/snazzy-info-window";
 import { MapComponent } from './map/map.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BarListComponent } from './bar-list/bar-list.component';
@@ -37,7 +36,6 @@ import { NavigationComponent } from './navigation/navigation.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB0wFWovTu0l6viLmcHHNoAu0HACusASVI'
     }),
-    AgmSnazzyInfoWindowModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
