@@ -4,6 +4,7 @@ $side-width: 300px;
   display: flex;
   flex-direction: column;
 }
+
 .main-window {
   flex: 1;
   display: flex;
@@ -14,6 +15,19 @@ $side-width: 300px;
   flex: 1;
   margin-right: $side-width;
   height: 100vh;
+  position: relative;
+
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0px 0px 150px 5px rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+  }
 }
 
 .search-area {
