@@ -3,8 +3,7 @@
   <navigation (openSearch)="toggleSearch()" (click)="openDialog()" (openLogin)="openLoginModal = true"></navigation>
   <div class="main-window">
     <div class="map-container">
-      <map [bars]="filteredBars" [center]="center" [class.isVisible]="searchVisible"
-           (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></map>
+      <app-map [bars]="filteredBars" [center]="center" [class.isVisible]="searchVisible" (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></app-map>
     </div>
     <div class="search-area" [class.isVisible]="searchVisible">
       <search-bar (textChanged)="filterBars($event)"></search-bar>
@@ -13,21 +12,16 @@
   </div>
 </div>
 
-<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
-          [(visible)]="openDetailsModal" [minWidth]="300">
+<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true" [(visible)]="openDetailsModal" [minWidth]="300">
   <bar-details [bar]="selectedBar" (openMarkV)="openMarkV($event)"></bar-details>
 </p-dialog>
-<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true"
-          [(visible)]="openMarkVModal">
+<p-dialog [header]="'Spot'" [modal]="true" [dismissableMask]="true" [(visible)]="openMarkVModal">
   <app-rank *ngIf="selectedBar" (closeModal)="closeMarkVModal()" [barTitle]="selectedBar.title"></app-rank>
 </p-dialog>
-<p-dialog [header]="'Login'" [modal]="true" [dismissableMask]="true"
-          [(visible)]="openLoginModal">
-  <app-login (close)="openLoginModal = false" [userLoggedIn]="userLoggedIn"
-             (loginSuccess)="handleLoginSucess()"></app-login>
+<p-dialog [header]="'Login'" [modal]="true" [dismissableMask]="true" [(visible)]="openLoginModal">
+  <app-login (close)="openLoginModal = false" [userLoggedIn]="userLoggedIn" (loginSuccess)="handleLoginSucess()"></app-login>
 </p-dialog>
-<p-dialog [header]="'Error'" [modal]="true" [dismissableMask]="true"
-[(visible)]="openUserAlreadyMakredModal">
+<p-dialog [header]="'Error'" [modal]="true" [dismissableMask]="true" [(visible)]="openUserAlreadyMakredModal">
   <div>Sorry, but you already marked this bar today</div>
   <br>
   <div style="text-align: right">סליחה, אבל כבר סימנת כאן היום</div>
