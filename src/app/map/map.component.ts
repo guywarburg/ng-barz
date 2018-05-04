@@ -34,7 +34,7 @@ export class MapComponent implements OnInit, OnChanges {
 
 	constructor() {
 		this.setDefaultValues();
-		this.iconPath = "../assets/images/beer-icon-white.png";
+		this.iconPath = "../assets/images/Location_on.png";
 		this.mapOptions = mapColors;
 	}
 

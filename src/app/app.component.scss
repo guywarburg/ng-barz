@@ -1,3 +1,4 @@
+@import '../styles/_z-index.scss';
 $side-width: 300px;
 
 .page-wrapper {
@@ -13,41 +14,29 @@ $side-width: 300px;
 
 .map-container {
   flex: 1;
-  margin-right: $side-width;
   height: 100vh;
   position: relative;
 
-  &:before {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0px 0px 150px 5px rgba(0, 0, 0, 0.75);
-    z-index: 1000;
-  }
-}
-
-.search-area {
-  background: #505050;
-  position: fixed;
-  right: 0;
-  width: $side-width;
-  height: 100vh;
-  transition: transform 0.3s ease-out;
+  // &:before {
+  //   display: block;
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   box-shadow: inset 0px 0px 150px 5px rgba(0, 0, 0, 0.75);
+  //   z-index: $z-main-window;
+  // }
 }
 
 @media only screen and (max-width: 500px) {
   .search-area {
     transform: translateX(540px);
-    //position: absolute;
     &.isVisible {
       transform: translateX(0);
       background: rgba(80, 80, 80, 0.8);
       width: 100%;
-      //position: fixed;
     }
   }
   .map-container{

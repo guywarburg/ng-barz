@@ -1,13 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="page-wrapper">
-  <navigation (openSearch)="toggleSearch()" (click)="openDialog()" (openLogin)="openLoginModal = true"></navigation>
+  <navigation (openSearch)="toggleSearch()" (openLogin)="openLoginModal = true"></navigation>
   <div class="main-window">
     <div class="map-container">
       <app-map [bars]="filteredBars" [center]="center" [class.isVisible]="searchVisible" (selectedBar)="reCenterMap($event)" (openDialog)="openModal($event)"></app-map>
-    </div>
-    <div class="search-area" [class.isVisible]="searchVisible">
-      <search-bar (textChanged)="filterBars($event)"></search-bar>
-      <bar-list [bars]="filteredBars" (selectedBar)="reCenterMap($event)"></bar-list>
     </div>
   </div>
 </div>
